@@ -588,6 +588,7 @@ export default function Portfolio() {
   
   // Tactical Interaction State
   const [bullets, setBullets] = useState<{ x: number; y: number; id: number }[]>([]);
+  const [sparks, setSparks] = useState<{ x: number; y: number; id: number; color: string }[]>([]);
   const [isFlashing, setIsFlashing] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
 
@@ -607,10 +608,22 @@ export default function Portfolio() {
     const newId = Date.now();
     setBullets(prev => [...prev.slice(-12), { x, y, id: newId }]);
     
+    // Spawn Sparks
+    const colors = ["#F5A623", "#FFD700", "#FFFFFF"];
+    const newSparks = Array.from({ length: 8 }).map((_, i) => ({
+      x, y, id: newId + i, color: colors[i % colors.length]
+    }));
+    setSparks(prev => [...prev.slice(-40), ...newSparks]);
+    
+    // Cleanup sparks
+    setTimeout(() => {
+      setSparks(prev => prev.filter(s => !newSparks.find(ns => ns.id === s.id)));
+    }, 1000);
+
     // Repair over time
     setTimeout(() => {
       setBullets(prev => prev.filter(b => b.id !== newId));
-    }, 6000);
+    }, 8000);
   };
 
   const handleChat = async (e: React.FormEvent) => {
@@ -798,7 +811,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
       `}</style>
       
       {/* Custom Cursor */}
-      <CustomCursor onShot={handleShot} bullets={bullets} />
+      <CustomCursor onShot={handleShot} bullets={bullets} sparks={sparks} />
 
       {/* Progress Bar */}
       <ScrollProgress />
@@ -1780,7 +1793,11 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
 // ── UTILITY COMPONENTS ────────────────────────────────────────────────────────
 
 // 1. Interactive Cursor with Tactical Ring & Bullet Effects
-function CustomCursor({ onShot, bullets }: { onShot: (x: number, y: number) => void, bullets: { x: number; y: number; id: number }[] }) {
+function CustomCursor({ onShot, bullets, sparks }: { 
+  onShot: (x: number, y: number) => void, 
+  bullets: { x: number; y: number; id: number }[],
+  sparks: { x: number; y: number; id: number; color: string }[]
+}) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [clicking, setClicking] = useState(false);
 
@@ -1906,6 +1923,25 @@ function CustomCursor({ onShot, bullets }: { onShot: (x: number, y: number) => v
           </div>
         </div>
       ))}
+
+      {/* Sparks */}
+      <AnimatePresence>
+        {sparks.map(s => (
+          <motion.div
+            key={s.id}
+            initial={{ x: s.x, y: s.y, scale: 1, opacity: 1 }}
+            animate={{ 
+              x: s.x + (Math.random() - 0.5) * 150, 
+              y: s.y + (Math.random() - 0.5) * 150, 
+              scale: 0, 
+              opacity: 0 
+            }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="fixed w-1 h-1 rounded-full z-[9998] pointer-events-none"
+            style={{ background: s.color, boxShadow: `0 0 4px ${s.color}` }}
+          />
+        ))}
+      </AnimatePresence>
 
       {/* Cursor Dot */}
       <motion.div
