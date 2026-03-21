@@ -738,6 +738,21 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           0%,100% { transform: scale(1);   opacity: 1; }
           50%      { transform: scale(1.3); opacity: 0.6; }
         }
+
+        /* Bullet Hole & Smoke Animations */
+        @keyframes holePunch {
+          0% { transform: scale(0); opacity: 0; }
+          40% { transform: scale(1.2); opacity: 1; }
+          100% { transform: scale(1); opacity: 0.9; }
+        }
+        @keyframes smokeRise {
+          0% { transform: translateY(0) scale(1); opacity: 0.4; filter: blur(4px); }
+          100% { transform: translateY(-40px) scale(1.5); opacity: 0; filter: blur(12px); }
+        }
+        @keyframes tearShimmer {
+          0%, 100% { filter: brightness(1) contrast(1.2); }
+          50% { filter: brightness(1.4) contrast(1.5); }
+        }
       `}</style>
       
       {/* Custom Cursor */}
@@ -1802,27 +1817,59 @@ function CustomCursor() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999]">
-      {/* Bullet Holes — persistent on page during session */}
+      {/* Bullet Holes — jagged 'tear' style with smoke */}
       {bullets.map(b => (
-        <motion.div
-          key={b.id}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.8 }}
-          className="absolute w-4 h-4"
-          style={{ left: b.x - 8, top: b.y - 8 }}
+        <div 
+          key={b.id} 
+          className="absolute pointer-events-none" 
+          style={{ left: b.x - 24, top: b.y - 48, width: 48, height: 64 }}
         >
-          {/* Hole */}
+          {/* Animated Smoke */}
           <div 
-            className="w-full h-full rounded-full bg-[#000] border border-white/20" 
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-12 bg-white/10 rounded-full"
             style={{ 
-              boxShadow: "0 0 12px rgba(0,0,0,0.9), inset 0 0 4px rgba(255,255,255,0.1)",
-              filter: "drop-shadow(0 0 2px rgba(245,166,35,0.2))" 
-            }} 
+              animation: "smokeRise 2s ease-out forwards",
+              maskImage: "radial-gradient(circle, white, transparent)"
+            }}
           />
-          {/* Cracks */}
-          <div className="absolute top-1/2 left-0 w-full h-px bg-white/20 -rotate-45" />
-          <div className="absolute top-0 left-1/2 w-px h-full bg-white/20 rotate-12" />
-        </motion.div>
+          
+          {/* The Tear / Hole Container */}
+          <div 
+            className="relative w-12 h-12 mt-8 animate-[holePunch_0.2s_ease-out_forwards]"
+            style={{ transform: "rotate(" + (b.id % 360) + "deg)" }}
+          >
+            {/* 1. Outer Jagged 'Explosion' / Torn Material */}
+            <div 
+              className="absolute inset-0 bg-white/20"
+              style={{ 
+                clipPath: "polygon(50% 0%, 65% 15%, 100% 10%, 85% 40%, 100% 60%, 75% 75%, 85% 100%, 50% 85%, 20% 100%, 25% 65%, 0% 50%, 15% 30%, 0% 5%, 35% 20%)",
+                filter: "drop-shadow(0 0 4px rgba(255,255,255,0.4))",
+                background: "linear-gradient(45deg, #666, #999, #444)"
+              }}
+            />
+            
+            {/* 2. Inner Jagged Metallic Edge (Darker) */}
+            <div 
+              className="absolute inset-[2px] bg-zinc-800"
+              style={{ 
+                clipPath: "polygon(50% 5%, 70% 20%, 90% 15%, 80% 45%, 95% 65%, 70% 80%, 80% 95%, 50% 80%, 25% 95%, 30% 65%, 5% 55%, 20% 35%, 5% 15%, 40% 25%)",
+              }}
+            />
+
+            {/* 3. The Core Void Hole (Jagged) */}
+            <div 
+              className="absolute inset-[6px] bg-[#080C12]"
+              style={{ 
+                clipPath: "polygon(50% 15%, 65% 30%, 85% 25%, 75% 50%, 85% 70%, 65% 85%, 75% 95%, 50% 85%, 30% 95%, 35% 70%, 15% 65%, 25% 45%, 15% 25%, 40% 35%)",
+                boxShadow: "inset 0 0 10px #000"
+              }}
+            />
+
+            {/* 4. Fine Cracks / Fractures */}
+            <div className="absolute top-1/2 left-0 w-full h-px bg-white/10 -rotate-45" />
+            <div className="absolute top-0 left-1/2 w-px h-full bg-white/10 rotate-15" />
+          </div>
+        </div>
       ))}
 
       {/* Cursor Dot */}
