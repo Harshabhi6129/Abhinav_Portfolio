@@ -24,7 +24,7 @@ const DATA = {
   location: "USA",
   links: {
     github: "https://github.com/Harshabhi6129/",
-    linkedin: "https://www.linkedin.com/in/harsha-abhinav/",
+    linkedin: "https://www.linkedin.com/in/abhinavku6129/",
     resume: "https://drive.google.com/file/d/14GU4ES4sRr4HspjUHnl2xBfZGtXolcAS/view",
     medium: "https://medium.com/@harsha6129abhi",
     research: "https://link.springer.com/chapter/10.1007/978-981-97-6318-4_28",
@@ -310,7 +310,7 @@ export default function Portfolio() {
 
 Abhinav K - MS CS at UBuffalo (2024-25), SDE with 4 years of experience.
 Contact: abhinavkuwork@gmail.com | (716) 319-4521
-Links: LinkedIn: linkedin.com/in/harsha-abhinav | GitHub: github.com/Harshabhi6129
+Links: LinkedIn: linkedin.com/in/abhinavku6129 | GitHub: github.com/Harshabhi6129
 
 Experience:
 - Software Engineer, Wells Fargo (May 2025-Present): Risk Evaluation microservices, Spring Boot, Kafka, OpenShift.
