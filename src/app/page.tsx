@@ -17,10 +17,10 @@ interface Certification {
 
 // ---------- DATA ----------
 const DATA = {
-  name: "Harsha K",
+  name: "Abhinav K",
   motto: "Design • Build • Solve • Repeat",
-  email: "harshabku.work@gmail.com",
-  phone: "(916) 545-5339",
+  email: "abhinavkuwork@gmail.com",
+  phone: "(716) 319-4521",
   location: "USA",
   links: {
     github: "https://github.com/Harshabhi6129/",
@@ -35,28 +35,44 @@ const DATA = {
   ],
   skillCategories: [
     {
-      category: "Programming Languages",
-      skills: ["C", "C++", "C#", "Python", "Java", "R", "Rust", "JavaScript", "Go", "PHP", "Shell Scripting"],
+      category: "Programming",
+      skills: ["Java", "Python", "JavaScript", "TypeScript", "Go", "SQL", "C/C++"],
     },
     {
-      category: "Web Development",
-      skills: ["HTML", "CSS", "TypeScript", "jQuery", "Bootstrap", "React", "Node.js", "Leptos", "Django", "Flask", "WebSockets"],
+      category: "Frameworks",
+      skills: ["Spring Boot", "Spring Cloud", "Spring WebFlux", "Spring Batch", "Spring Actuator", "React.js", "Node.js", "Express", "GraphQL"],
     },
     {
       category: "Databases",
-      skills: ["MySQL", "PostgreSQL", "Oracle", "SQL Server", "MongoDB", "Cassandra", "Redis", "DynamoDB", "Neo4j"],
+      skills: ["PostgreSQL", "Oracle DB", "MySQL", "MongoDB", "DynamoDB", "Cassandra"],
     },
     {
-      category: "Cloud Platforms",
-      skills: ["AWS (Aurora, Redshift, EC2, S3, SQS, CloudWatch, Lambda)", "Azure (SQL DB, Data Factory, Blob Storage)"],
+      category: "Messaging, Streaming & Cache",
+      skills: ["Apache Kafka", "RabbitMQ", "AWS SQS/SNS", "Redis"],
     },
     {
-      category: "Tools & DevOps",
-      skills: ["Apache Kafka", "RabbitMQ", "Linux", "Git", "Jenkins", "Docker", "Kubernetes", "Terraform", "Postman", "Jest", "Chai", "Mocha", "Prometheus", "Grafana", "WebRTC", "Maven", "Gradle", "SonarQube", "Kibana", "OpenTelemetry"],
+      category: "Cloud",
+      skills: ["AWS (EC2, S3, RDS, Lambda, EKS, IAM, CloudWatch, SNS, SQS)", "Azure (Azure DevOps)", "GCP", "OpenShift"],
     },
     {
-      category: "Core Competencies",
-      skills: ["System Design", "Microservices", "CI/CD", "Distributed Systems", "Cloud Storage", "Unit Testing", "Debugging"],
+      category: "Observability",
+      skills: ["Prometheus", "Grafana", "Micrometer", "AWS CloudWatch", "ELK Stack", "Splunk"],
+    },
+    {
+      category: "Security",
+      skills: ["OAuth2", "JWT", "RBAC", "AWS IAM"],
+    },
+    {
+      category: "DevOps & Infrastructure",
+      skills: ["Docker", "Kubernetes", "Terraform", "Jenkins", "Git", "Maven", "Gradle", "Linux", "Bash", "Postman", "JMeter", "Jira"],
+    },
+    {
+      category: "Testing",
+      skills: ["JUnit", "Mockito", "Testcontainers", "Jest", "Cucumber"],
+    },
+    {
+      category: "Methodologies",
+      skills: ["Agile", "Scrum", "System Design", "Event-Driven Architecture", "Microservices", "CI/CD"],
     },
   ],
   projects: [
@@ -74,9 +90,9 @@ const DATA = {
       demo: "https://medilink-rust.vercel.app/",
     },
     {
-      title: "No-Code NLP Model Training Platform",
-      blurb: "Built a no-code ML/NLP trainer enabling dataset upload, task setup, guided model selection, dynamic hyperparameters, live metrics dashboards, and exportable artifacts—reducing setup time from hours to minutes.",
-      tools: ["FastAPI", "PyTorch", "HuggingFace", "React", "WebSockets"],
+      title: "No-Code ML Training Platform",
+      blurb: "Automated ML fine-tuning and model recommendation using FastAPI, PyTorch, HuggingFace, Google Gemini APIs, DynamoDB, S3, Docker, and AWS EC2, orchestrating distributed GPU-backed training workloads with a React dashboard and WebSocket monitoring—reducing setup time from hours to minutes (50%).",
+      tools: ["FastAPI", "PyTorch", "HuggingFace", "Google Gemini APIs", "DynamoDB", "S3", "Docker", "AWS EC2", "React", "WebSockets"],
     },
     {
       title: "Prompt Refinement & AI Chat Application",
@@ -124,45 +140,29 @@ const DATA = {
   experience: [
     {
       role: "Software Engineer",
-      org: "JPMorgan Chase",
-      time: "May 2025 – Sep 2025",
+      org: "Wells Fargo",
+      time: "May 2025 – Present",
+      location: "CA, United States",
       points: [
-        "Implemented idempotency keys and transactional publish/consume in the posting path after tracing duplicate ledger writes during peak settlement windows; brought error rate under 0.1% and improved p95 stability with Grafana and trace-linked logs.",
-        "Tuned Kafka consumer batching and backpressure after profiling serialization overhead, reducing p95 latency by roughly 18% in the 3:55–4:15 pm ET window and rolling out gradually behind a feature flag with ops sign-off.",
-        "Partnered with Operations and L2 to expand structured logs, refine alert thresholds, and document a triage playbook, improving incident detection and handoff times by about 25% for recurring I/O timeouts.",
-        "Co-authored safer configuration and secrets templates, added smoke and rollback guards in CI/CD pipelines, and helped cut release rollbacks by roughly 30% across two deployment cycles.",
-      ],
-    },
-    {
-      role: "Research Assistant",
-      org: "University at Buffalo",
-      time: "Jan 2025 – Present",
-      location: "Buffalo, New York, United States · Hybrid",
-      points: [
-        "Worked on the GreenLLM research project focused on analyzing and improving the energy efficiency, runtime, and memory performance of source code generated by models like GPT-4o, Gemini, DeepSeek, and Llama 3. Designed and implemented automated pipelines to generate, test, and benchmark thousands of LLM-produced solutions using Python APIs and LeetCode-based datasets.",
-        "Developed energy-aware prompting strategies, feedback loops, and profiling systems using perf, mprof, and custom scripts to monitor CPU and RAM energy consumption on Chameleon Cloud. Built a generator–profiler–critic architecture enabling self-optimization of LLM outputs, and performed data aggregation and statistical analysis to evaluate performance across models.",
+        "Led Risk Evaluation and Rule Management microservices processing 2–3M daily transaction events via Spring Boot, Spring Kafka, Oracle 19c, and Redis on OpenShift at sub-second SLA.",
+        "Introduced Redis-backed rule metadata cache with PostgreSQL config store and atomic version-swap refresh to handle 300+ compliance rules and high-TPS Hibernate hydration, reducing p95 latency from 620ms to 340ms.",
+        "Enforced write-path idempotency via composite unique constraints, JPA transactional boundaries, and manual offset commit to resolve duplicate Oracle audit records from Kafka at-least-once delivery, reducing replay defects 80%.",
+        "Implemented graceful shutdown, partition-aware readiness probes, and Micrometer/Grafana lag dashboards for rolling OpenShift deployments across 24+ Kafka partitions, cutting deployment latency spikes 40%.",
       ],
     },
     {
       role: "Software Developer",
-      org: "Bajaj FinServ",
-      time: "Aug 2022 – Jul 2024",
+      org: "IBM",
+      time: "July 2021 – May 2024",
+      location: "India",
       points: [
-        "Built and optimized a Spring Boot–based decision service with Redis caching and parallel partner reads, adding idempotent retries that improved median credit decision times by around 35% and helped stabilize day-end performance.",
-        "Worked with data and ops teams to design anomaly views and event-driven webhook routing, so outliers reached the right queues earlier and manual reviews dropped by roughly 22%.",
-        "Integrated Aadhaar offline eKYC and PAN verification flows with retry and audit logging, cutting resubmissions by about 28% and clearing compliance checks with fewer follow-ups.",
-        "Helped set service-level objectives, maintain on-call runbooks, and plan load tests with SRE and DBA teams; also supported release prep by walking Compliance and Risk through required change notes.",
-        "Partnered with DBA and SRE to tune slow queries, add composite indexes, and set up capacity alarms and sampling in logs—bringing down database hotspot incidents from 7 to 2 per quarter.",
-      ],
-    },
-    {
-      role: "Software Developer Intern",
-      org: "Wells Fargo",
-      time: "Apr 2021 – Sep 2021",
-      points: [
-        "Built an alert-preferences update API in Spring Boot with input validation, PII masking, and a targeted SQL index, cutting median update time to under two seconds and lowering client validation errors by 20% in UAT.",
-        "Implemented a scheduled recovery job for dead-letter Kafka events with retry and backoff, improving reprocessing by 25% in staging and clearing the backlog ahead of release.",
-        "Added JUnit and Testcontainers coverage, structured Splunk logs, and a Jenkins-integrated smoke test pipeline to improve feedback loops and on-call visibility.",
+        "Built Provisioning Orchestrator and Access Governance services using Spring Boot, Kafka, PostgreSQL, MongoDB, and AWS EKS, automating 1,500+ sandbox environments annually and reducing provisioning time from days to minutes.",
+        "Enforced deterministic state machine in PostgreSQL with optimistic concurrency control and transactional Kafka task dispatch to handle concurrent AWS failures, reducing manual remediation 60%.",
+        "Offloaded synchronous AWS SDK calls to partition-keyed Kafka workers with MongoDB execution tracking and idempotent IAM operations, improving provisioning success rates 30%.",
+        "Enforced Spring Security OAuth2, JWT validation, Hibernate tenant-scoped filters, and AWS SDK expiration sweeps, reducing unauthorized access incidents 70%.",
+        "Extracted Access Governance with gRPC internal validation, Kafka eventual consistency, and Kubernetes Ingress rate limiting from a monolith, reducing deployment blast radius 40%.",
+        "Instrumented Micrometer timers per AWS operation and wired SNS/SQS failure fan-out for better observability, reducing MTTR 45%.",
+        "Introduced Testcontainers-based PostgreSQL and Kafka integration tests in Jenkins CI, reducing release defects 50%.",
       ],
     },
   ],
@@ -171,7 +171,7 @@ const DATA = {
       program: "Master of Science in Computer Science",
       school: "University at Buffalo, The State University of New York",
       time: "Aug 2024 – Dec 2025",
-      details: "Coursework includes Database Management, Data Structures and Algorithms, Distributed Systems, Object-Oriented Programming, Cloud Computing, Software Development, Operating Systems, Artificial Intelligence, Machine Learning, and Deep Learning.",
+      details: "Coursework includes Database management, Data Structures and Algorithms, Distributed Systems, Object-Oriented Programming (OOPs), Cloud Computing, Software Development, Operating Systems, Artificial Intelligence, Machine Learning, Deep Learning.",
       focus: [
         "Distributed Systems",
         "Cloud Computing",
@@ -180,6 +180,7 @@ const DATA = {
         "Deep Learning",
         "Software Development",
         "Database Management",
+        "Operating Systems",
       ],
     },
   ],
@@ -201,6 +202,13 @@ const DATA = {
       icon: "award",
     },
     {
+      title: "Career Essentials in Generative AI",
+      issuer: "Microsoft and LinkedIn",
+      issued: "Sep 2024",
+      link: "https://www.linkedin.com/learning/certificates/868ae44056adbc0bf99c92c394ec3d1187d484883cc00c6758d689658bbf46d7",
+      icon: "award",
+    },
+    {
       title: "AWS Certified Machine Learning Engineer – Associate",
       issuer: "Amazon Web Services",
       issued: "May 2025",
@@ -217,18 +225,11 @@ const DATA = {
       icon: "award",
     },
     {
-      title: "Tata Group - Data Visualisation: Empowering Business with Effective Insights",
+      title: "Tata Group - Data Visualisation",
       issuer: "Tata Group",
       issued: "Jan 2025",
       credentialId: "oj5SXty9NLDWfCPqk",
       link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/ifobHAoMjQs9s6bKS/MyXvBcppsW2FkNYCX_ifobHAoMjQs9s6bKS_o9Qv8ETNTrDdS37xy_1737607135331_completion_certificate.pdf",
-      icon: "award",
-    },
-    {
-      title: "Career Essentials in Generative AI by Microsoft and LinkedIn",
-      issuer: "Microsoft",
-      issued: "Sep 2024",
-      link: "https://www.linkedin.com/learning/certificates/868ae44056adbc0bf99c92c394ec3d1187d484883cc00c6758d689658bbf46d7",
       icon: "award",
     },
   ],
@@ -305,31 +306,22 @@ export default function Portfolio() {
     setChatResponse({ question, answer: "Thinking..." });
 
     try {
-      const KNOWLEDGE_BASE = `You are Harsha's AI assistant. Answer concisely (under 100 words) from this knowledge:
+      const KNOWLEDGE_BASE = `You are Abhinav's AI assistant. Answer concisely (under 100 words) from this knowledge:
 
-Harsha K - MS CS at UBuffalo (4.0 GPA, 2024-25), seeking SDE roles.
-Contact: harshabku.work@gmail.com | (916) 545-5339
-Links: LinkedIn: linkedin.com/in/harsha-abhinav | GitHub: github.com/Harshabhi6129 | Medium: medium.com/@harsha6129abhi
+Abhinav K - MS CS at UBuffalo (2024-25), SDE with 4 years of experience.
+Contact: abhinavkuwork@gmail.com | (716) 319-4521
+Links: LinkedIn: linkedin.com/in/harsha-abhinav | GitHub: github.com/Harshabhi6129
 
 Experience:
-- Research Assistant, UBuffalo (Jan 2025-Present): GreenLLM project, energy-efficient LLM code
-- Software Engineer, JPMorgan (May-Sep 2025): Kafka optimization, 18% latency improvement
-- Software Developer, Bajaj Finserv (2022-2024): Spring Boot, Redis, 35% faster decisions
-- Intern, Wells Fargo (2021): Spring Boot APIs, Kafka recovery
+- Software Engineer, Wells Fargo (May 2025-Present): Risk Evaluation microservices, Spring Boot, Kafka, OpenShift.
+- Software Developer, IBM (July 2021-May 2024): Provisioning Orchestrator, AWS EKS, Spring Boot, Kafka.
 
-Skills: Java, Python, React, Node.js, Spring Boot, FastAPI, AWS, Kafka, Docker, K8s, PostgreSQL, MongoDB, Redis, Microservices, AI/ML
+Skills: Java, Python, React, Node.js, Spring Boot, Kafka, AWS, Docker, K8s, PostgreSQL, MongoDB, Redis, Microservices, AI/ML, JUnit, Mockito, Testcontainers.
 
 Top Projects:
-1. Job Genie (React, FastAPI, TensorFlow) - AI Recruitment Platform - github.com/Harshabhi6129/Job-Genie
-2. MediLink (React, TypeScript, Medical AI) - Clinical Collaboration Network - github.com/Harshabhi6129/MediLink
-3. No-Code NLP Platform (FastAPI, PyTorch, HuggingFace)
-4. Sentiment Analysis 84.6% accuracy (Python, NLP, TF-IDF) - github.com/Harshabhi6129/Sentiment-Analysis-with-Tone-Detection
-5. PINTOS OS (C, x86, 30% improvement)
-6. AI Virtual Mouse (OpenCV, MediaPipe) - github.com/Harshabhi6129/Real-Time-AI-Virtual-Mouse-System-Using-Deep-Learning
-7. Persona AI RAG chatbot (OpenAI, ChromaDB) - github.com/Harshabhi6129/Persona_AI
+- No-Code ML Training Platform: FastAPI, PyTorch, HuggingFace, Google Gemini APIs, DynamoDB, S3, Docker, AWS EC2, React.
 
-Certs: AWS ML Engineer, Solutions Architect, Developer; BCG GenAI
-Research: IoT Evapotranspiration (DoSCI-2024)`;
+Certs: AWS Solutions Architect, AWS Developer, Microsoft Essentials in Generative AI.`;
 
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -566,9 +558,7 @@ Research: IoT Evapotranspiration (DoSCI-2024)`;
       <Section id="about" title="About" icon={<PenTool className="h-5 w-5" />}>
         <GlassCard>
           <p className="text-white/80">
-            I&apos;m a software engineer who loves turning ideas into shippable, reliable systems. From backend services and event-driven
-            architectures to AI-powered apps, I obsess over performance, clarity, and developer experience. When tools don&apos;t exist,
-            I build them. When constraints appear, I design around them. And when the release hits prod, it should just feel right.
+            Software Engineer with 4 years of experience designing and deploying scalable backend and distributed systems across financial services and cloud infrastructure. Proficient in Java and the Spring ecosystem, building event-driven Kafka pipelines, enforcing OAuth2/JWT security, optimizing relational and NoSQL databases, and operating containerized services on AWS and OpenShift with Prometheus/Grafana observability and CI/CD automation.
           </p>
         </GlassCard>
       </Section>
