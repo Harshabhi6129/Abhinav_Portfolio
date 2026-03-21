@@ -643,16 +643,16 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           --amber-dim: rgba(245,166,35,0.12);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; cursor: none !important; }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; cursor: none !important; }
 
         body {
           margin: 0;
           background: var(--bg);
           color: var(--text);
           font-family: 'DM Sans', sans-serif;
-          cursor: none;
+          cursor: none !important;
         }
 
         ::selection { background: var(--amber); color: #000; }
