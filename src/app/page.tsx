@@ -585,10 +585,33 @@ export default function Portfolio() {
   const [chatInput, setChatInput] = useState("");
   const [chatMessages, setChatMessages] = useState<{ role: "user" | "ai"; text: string }[]>([]);
   const [chatLoading, setChatLoading] = useState(false);
+  
+  // Tactical Interaction State
+  const [bullets, setBullets] = useState<{ x: number; y: number; id: number }[]>([]);
+  const [isFlashing, setIsFlashing] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
+
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  const handleShot = (x: number, y: number) => {
+    // Trigger Effects
+    setIsFlashing(true);
+    setIsShaking(true);
+    setTimeout(() => setIsFlashing(false), 50);
+    setTimeout(() => setIsShaking(false), 150);
+
+    // Spawn Bullet Hole
+    const newId = Date.now();
+    setBullets(prev => [...prev.slice(-12), { x, y, id: newId }]);
+    
+    // Repair over time
+    setTimeout(() => {
+      setBullets(prev => prev.filter(b => b.id !== newId));
+    }, 6000);
+  };
 
   const handleChat = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -628,7 +651,26 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
   };
 
   return (
-    <>
+    <motion.div 
+      className="relative"
+      animate={isShaking ? { 
+        x: [0, -2, 2, -1, 1, 0], 
+        y: [0, 1, -1, 1, -1, 0] 
+      } : {}}
+      transition={{ duration: 0.15 }}
+    >
+      {/* Muzzle Flash Overlay */}
+      <AnimatePresence>
+        {isFlashing && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] pointer-events-none"
+            style={{ background: "rgba(245,166,35,0.08)" }}
+          />
+        )}
+      </AnimatePresence>
       {/* Google Fonts */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap');
@@ -756,7 +798,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
       `}</style>
       
       {/* Custom Cursor */}
-      <CustomCursor />
+      <CustomCursor onShot={handleShot} bullets={bullets} />
 
       {/* Progress Bar */}
       <ScrollProgress />
@@ -1731,17 +1773,16 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </motion.div>
   );
 }
 
 // ── UTILITY COMPONENTS ────────────────────────────────────────────────────────
 
 // 1. Interactive Cursor with Tactical Ring & Bullet Effects
-function CustomCursor() {
+function CustomCursor({ onShot, bullets }: { onShot: (x: number, y: number) => void, bullets: { x: number; y: number; id: number }[] }) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [clicking, setClicking] = useState(false);
-  const [bullets, setBullets] = useState<{ x: number; y: number; id: number }[]>([]);
 
   useEffect(() => {
     const playShot = () => {
@@ -1749,21 +1790,21 @@ function CustomCursor() {
         const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
         
         // 1. The Blast (White Noise)
-        const bufferSize = ctx.sampleRate * 0.1;
+        const bufferSize = ctx.sampleRate * 0.15;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.8;
         
         const noise = ctx.createBufferSource();
         noise.buffer = buffer;
         const noiseFilter = ctx.createBiquadFilter();
         noiseFilter.type = 'lowpass';
-        noiseFilter.frequency.setValueAtTime(3000, ctx.currentTime);
-        noiseFilter.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
+        noiseFilter.frequency.setValueAtTime(3500, ctx.currentTime);
+        noiseFilter.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.1);
         
         const noiseGain = ctx.createGain();
-        noiseGain.gain.setValueAtTime(0.3, ctx.currentTime);
-        noiseGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        noiseGain.gain.setValueAtTime(0.4, ctx.currentTime);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
         
         noise.connect(noiseFilter);
         noiseFilter.connect(noiseGain);
@@ -1773,19 +1814,19 @@ function CustomCursor() {
         const thump = ctx.createOscillator();
         const thumpGain = ctx.createGain();
         thump.type = 'sine';
-        thump.frequency.setValueAtTime(120, ctx.currentTime);
-        thump.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 0.08);
+        thump.frequency.setValueAtTime(140, ctx.currentTime);
+        thump.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 0.1);
         
-        thumpGain.gain.setValueAtTime(0.5, ctx.currentTime);
-        thumpGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        thumpGain.gain.setValueAtTime(0.6, ctx.currentTime);
+        thumpGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
         
         thump.connect(thumpGain);
         thumpGain.connect(ctx.destination);
 
         noise.start();
         thump.start();
-        noise.stop(ctx.currentTime + 0.12);
-        thump.stop(ctx.currentTime + 0.12);
+        noise.stop(ctx.currentTime + 0.15);
+        thump.stop(ctx.currentTime + 0.15);
       } catch (e) {
         console.error("Audio error", e);
       }
@@ -1795,13 +1836,7 @@ function CustomCursor() {
     const down = (e: MouseEvent) => {
       setClicking(true);
       playShot();
-      // Spawn bullet hole
-      const newId = Date.now();
-      setBullets(prev => [...prev.slice(-10), { x: e.clientX, y: e.clientY, id: newId }]);
-      // Repair hole after 5 seconds
-      setTimeout(() => {
-        setBullets(prev => prev.filter(b => b.id !== newId));
-      }, 4500);
+      onShot(e.clientX, e.clientY);
     };
     const up = () => setClicking(false);
 
