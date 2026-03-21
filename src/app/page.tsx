@@ -634,7 +634,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap');
 
         :root {
-          --bg: #080C12;
+          --bg: #12141D;
           --surface: #0E1118;
           --border: rgba(255,255,255,0.08);
           --text: #E8E4DC;
@@ -780,9 +780,6 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
                 23
               </div>
             </div>
-            <span className="hidden md:block font-mono-custom text-xs tracking-[0.2em] uppercase text-white/40 group-hover:text-white/70 transition">
-              Abhinav Kusampudi
-            </span>
           </a>
 
           {/* Links */}
@@ -1219,42 +1216,44 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {DATA.skillBento.map((skill, idx) => {
-              const category = DATA.skillCategories.find(c => c.items.includes(skill.label));
-              const isDimmed = activeSkillGroup && category?.name !== activeSkillGroup;
-              
-              return (
-                <motion.div
-                  key={skill.label}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.02, duration: 0.4 }}
-                  className="bento-tile group relative overflow-hidden p-5 border border-white/8 transition-all duration-300"
-                  style={{
-                    opacity: isDimmed ? 0.15 : 1,
-                    background: "#080C12",
-                    gridColumn: skill.size === "lg" ? "span 1" : "auto" // simplified
-                  }}
-                >
-                  <div
-                    className="absolute top-0 left-0 w-1 h-0 group-hover:h-full transition-all duration-300"
-                    style={{ background: groupColors[skill.group] }}
-                  />
-                  <div className="font-mono-custom text-[10px] text-white/20 tracking-[0.2em] uppercase mb-2">
-                    {skill.group}
-                  </div>
-                  <div className="text-white font-bold tracking-tight text-lg group-hover:translate-x-1 transition-transform">
-                    {skill.label}
-                  </div>
-                  
-                  {/* Background marker code highlight */}
-                  <div className="absolute -bottom-2 -right-2 font-mono-custom text-[32px] font-black opacity-[0.03] select-none pointer-events-none group-hover:opacity-[0.07] transition">
-                    {skill.label.substring(0, 2).toUpperCase()}
-                  </div>
-                </motion.div>
-              );
-            })}
+            {DATA.skillBento
+              .filter(skill => {
+                if (!activeSkillGroup) return true;
+                const category = DATA.skillCategories.find(c => c.name === activeSkillGroup);
+                return category?.items.includes(skill.label);
+              })
+              .map((skill, idx) => {
+                return (
+                  <motion.div
+                    key={skill.label}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.02, duration: 0.4 }}
+                    className="bento-tile group relative overflow-hidden p-5 border border-white/8 transition-all duration-300"
+                    style={{
+                      background: "#080C12",
+                      gridColumn: skill.size === "lg" ? "span 1" : "auto"
+                    }}
+                  >
+                    <div
+                      className="absolute top-0 left-0 w-1 h-0 group-hover:h-full transition-all duration-300"
+                      style={{ background: groupColors[skill.group] }}
+                    />
+                    <div className="font-mono-custom text-[10px] text-white/20 tracking-[0.2em] uppercase mb-2">
+                      {skill.group}
+                    </div>
+                    <div className="text-white font-bold tracking-tight text-lg group-hover:translate-x-1 transition-transform">
+                      {skill.label}
+                    </div>
+                    
+                    {/* Background marker code highlight */}
+                    <div className="absolute -bottom-2 -right-2 font-mono-custom text-[32px] font-black opacity-[0.03] select-none pointer-events-none group-hover:opacity-[0.07] transition">
+                      {skill.label.substring(0, 2).toUpperCase()}
+                    </div>
+                  </motion.div>
+                );
+              })}
           </div>
         </div>
       </section>
@@ -1489,10 +1488,10 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
                 <div className="absolute top-0 right-0 p-4 font-mono-custom text-[10px] text-white/20 uppercase tracking-widest">Springer Nature · 2024</div>
                 <div className="font-mono-custom text-amber-500 text-xs tracking-widest uppercase mb-4">Published Paper</div>
                 <h3 className="text-2xl font-bold text-white mb-4 tracking-tight leading-snug">
-                  Securing the Edge: Implementing a Multi-layered Security Framework for Edge Computing Environments
+                  Performance Evaluation & Optimization for Sustainable Crop Water Management • DoSCI-2024
                 </h3>
                 <p className="text-white/50 text-sm mb-8 leading-relaxed">
-                  Developed a robust, multi-layered security framework designed specifically for edge computing, addressing latency-sensitive threat detection and decentralized access control.
+                  Performance evaluation and optimization of crop water management system based on IoT and Deep Learning. Published in Springer Nature, 2024.
                 </p>
                 <a
                   href={DATA.links.research}
@@ -1511,32 +1510,57 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
       {/* ── WRITING ──────────────────────────────────────────────── */}
       <section id="writing" className="py-28 bg-[#080C12] clip-top">
         <div className="mx-auto max-w-7xl px-6">
-          <SectionLabel number="07" label="Manuals" />
-          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
-            <h2 className="font-display text-7xl text-white leading-none">
-              TECHNICAL<br />
-              <span style={{ color: "#F5A623" }}>LOGS</span>
-            </h2>
+          <SectionLabel number="07" label="Writing" />
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-8">
+            <div>
+              <h2 className="font-display text-7xl text-white leading-none mb-4">
+                WRITING<br />
+                <span style={{ color: "#F5A623" }}>LOGS</span>
+              </h2>
+              <p className="text-white/60 text-sm max-w-md leading-relaxed">
+                Occasional notes on engineering, AI, and shipping well-crafted software. Posts are hosted on Medium.
+              </p>
+            </div>
             <a
               href={DATA.links.medium}
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono-custom text-xs tracking-widest uppercase px-6 py-3 border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition lift"
             >
-              Explore Medium
+              Visit Medium
             </a>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              { t: "The CAP Theorem in Modern Microservices", d: "A tactical guide to balancing consistency, availability, and partition tolerance in distributed databases." },
-              { t: "Mastering Kafka Partitioning Strategies", d: "How to design data keys for optimal throughput and strict ordering in event-driven systems." },
+              { 
+                t: "Tech’s Biggest Frenemies: A Guide to the Co-opetition Circus", 
+                d: "A guide to the absurd and hilarious world of tech giants collaborating while competing. Welcome to the co-opetition circus.",
+                date: "Nov 16, 2025",
+                read: "5 min read"
+              },
+              { 
+                t: "When AI Forgets: The Curious Case of Context Overload", 
+                d: "Exploring the challenges of context window limitations and how AI models behave when conversations drift.",
+                date: "Jun 11, 2025",
+                read: "4 min read"
+              },
+              { 
+                t: "Deep Learning Model Evaluations and Validations: A Comprehensive Guide", 
+                d: "Building a model is only half the battle. This guide covers the critical validation steps to ensure performance beyond training data.",
+                date: "Feb 28, 2025",
+                read: "8 min read"
+              },
             ].map(post => (
               <div key={post.t} className="p-6 border border-white/5 hover:bg-white/[0.01] transition relative group">
                 <div className="absolute top-4 right-6 text-white/10 group-hover:text-[#F5A62344] transition-colors"><ExternalLink className="w-4 h-4" /></div>
-                <h4 className="text-lg font-bold text-white/90 mb-2 truncate group-hover:text-white transition">{post.t}</h4>
+                <h4 className="text-lg font-bold text-white/90 mb-2 group-hover:text-white transition">{post.t}</h4>
                 <p className="text-sm text-white/40 leading-relaxed mb-4">{post.d}</p>
-                <div className="font-mono-custom text-[10px] text-white/20 uppercase tracking-widest">6 min read</div>
+                <div className="flex items-center gap-4 font-mono-custom text-[10px] text-white/20 uppercase tracking-widest">
+                  <span>{post.date}</span>
+                  <span className="w-1 h-1 rounded-full bg-white/10" />
+                  <span>{post.read}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -1705,11 +1729,64 @@ function CustomCursor() {
   const [bullets, setBullets] = useState<{ x: number; y: number; id: number }[]>([]);
 
   useEffect(() => {
+    const playShot = () => {
+      try {
+        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        
+        // 1. The Blast (White Noise)
+        const bufferSize = ctx.sampleRate * 0.1;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const noiseFilter = ctx.createBiquadFilter();
+        noiseFilter.type = 'lowpass';
+        noiseFilter.frequency.setValueAtTime(3000, ctx.currentTime);
+        noiseFilter.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.08);
+        
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.setValueAtTime(0.3, ctx.currentTime);
+        noiseGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        
+        noise.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(ctx.destination);
+
+        // 2. The Recoil/Thump (Low-freq sine)
+        const thump = ctx.createOscillator();
+        const thumpGain = ctx.createGain();
+        thump.type = 'sine';
+        thump.frequency.setValueAtTime(120, ctx.currentTime);
+        thump.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 0.08);
+        
+        thumpGain.gain.setValueAtTime(0.5, ctx.currentTime);
+        thumpGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+        
+        thump.connect(thumpGain);
+        thumpGain.connect(ctx.destination);
+
+        noise.start();
+        thump.start();
+        noise.stop(ctx.currentTime + 0.12);
+        thump.stop(ctx.currentTime + 0.12);
+      } catch (e) {
+        console.error("Audio error", e);
+      }
+    };
+
     const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
     const down = (e: MouseEvent) => {
       setClicking(true);
+      playShot();
       // Spawn bullet hole
-      setBullets(prev => [...prev.slice(-10), { x: e.clientX, y: e.clientY, id: Date.now() }]);
+      const newId = Date.now();
+      setBullets(prev => [...prev.slice(-10), { x: e.clientX, y: e.clientY, id: newId }]);
+      // Repair hole after 5 seconds
+      setTimeout(() => {
+        setBullets(prev => prev.filter(b => b.id !== newId));
+      }, 4500);
     };
     const up = () => setClicking(false);
 
@@ -1735,10 +1812,16 @@ function CustomCursor() {
           style={{ left: b.x - 8, top: b.y - 8 }}
         >
           {/* Hole */}
-          <div className="w-full h-full rounded-full bg-[#000] border border-white/10" style={{ boxShadow: "0 0 10px #000" }} />
+          <div 
+            className="w-full h-full rounded-full bg-[#000] border border-white/20" 
+            style={{ 
+              boxShadow: "0 0 12px rgba(0,0,0,0.9), inset 0 0 4px rgba(255,255,255,0.1)",
+              filter: "drop-shadow(0 0 2px rgba(245,166,35,0.2))" 
+            }} 
+          />
           {/* Cracks */}
-          <div className="absolute top-1/2 left-0 w-full h-px bg-white/5 -rotate-45" />
-          <div className="absolute top-0 left-1/2 w-px h-full bg-white/5 rotate-12" />
+          <div className="absolute top-1/2 left-0 w-full h-px bg-white/20 -rotate-45" />
+          <div className="absolute top-0 left-1/2 w-px h-full bg-white/20 rotate-12" />
         </motion.div>
       ))}
 
