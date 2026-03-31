@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Harsha K — Portfolio",
-  description: "Portfolio of Harsha K, Software Engineer | Building AI, Backend, and Cloud Solutions",
+  title: "Abhinav K — Portfolio",
+  description: "Portfolio of Abhinav K, Software Engineer | Building AI, Backend, and Cloud Solutions",
 };
 
 export default function RootLayout({

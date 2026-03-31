@@ -673,7 +673,7 @@ export default function Portfolio() {
     // Repair over time
     setTimeout(() => {
       setBullets(prev => prev.filter(b => b.id !== newId));
-    }, 8000);
+    }, 2500);
   };
 
   const handleChat = async (e: React.FormEvent) => {
@@ -1995,14 +1995,14 @@ function CustomCursor({ onShot, bullets, sparks }: {
 
       {/* Cursor Dot */}
       <motion.div
-        className="fixed w-1.5 h-1.5 rounded-full bg-[#F5A623] z-[10000]"
+        className="fixed pointer-events-none w-1.5 h-1.5 rounded-full bg-[#F5A623] z-[10000]"
         animate={{ x: pos.x - 3, y: pos.y - 3, scale: clicking ? 2 : 1 }}
         transition={{ type: "spring", damping: 30, stiffness: 400, mass: 0.1 }}
       />
 
       {/* Ring (Smooth lag) */}
       <motion.div
-        className="fixed w-10 h-10 border border-[#F5A623] rounded-full z-[10000] flex items-center justify-center"
+        className="fixed pointer-events-none w-10 h-10 border border-[#F5A623] rounded-full z-[10000] flex items-center justify-center"
         animate={{
           x: pos.x - 20,
           y: pos.y - 20,
