@@ -166,6 +166,14 @@ const DATA = {
   ],
   featuredProjects: [
     {
+      id: "roadmaphub",
+      title: "RoadmapHub",
+      blurb: "Chrome extension that turns roadmap.sh learning progress into a structured GitHub portfolio — automatically. Like LeetHub, but for learning. Detects topic completion, generates AI-enhanced summaries, and commits structured markdown to GitHub.",
+      tools: ["TypeScript", "React 19", "Chrome MV3", "Vite", "Gemini AI", "GitHub OAuth", "Cloudflare Workers"],
+      code: "https://github.com/Harshabhi6129/roadmaphub-extension",
+      accent: "#00D4FF",
+    },
+    {
       id: "jobgenie",
       title: "Job Genie",
       blurb: "AI-powered talent acquisition platform. Parses JDs and ranks candidates using NLP + ML — reduces sourcing time by 80%.",
@@ -288,6 +296,15 @@ const groupColors: Record<string, string> = {
   obs: "#34D399",
   ai: "#F472B6",
 };
+
+function scrollToSection(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
+  e.preventDefault();
+  e.stopPropagation();
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
 function useCountUp(target: number, duration = 1500, start = false) {
   const [count, setCount] = useState(0);
@@ -500,6 +517,7 @@ function SectionRoadmap() {
           <a
             key={id}
             href={`#${id}`}
+            onClick={(e) => scrollToSection(e, id)}
             className="group relative flex items-center gap-3"
             style={{ paddingLeft: "24px" }}
           >
@@ -603,6 +621,7 @@ function BottomNavBar() {
                 <a
                   key={id}
                   href={`#${id}`}
+                  onClick={(e) => scrollToSection(e, id)}
                   className="relative font-mono-custom text-[10px] tracking-widest uppercase px-3 py-1.5 transition-all duration-200"
                   style={{
                     color: isActive ? "#080C12" : "rgba(255,255,255,0.4)",
@@ -752,6 +771,10 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
 
         html { scroll-behavior: smooth; cursor: none !important; }
 
+        /* Offset sections for fixed navbar */
+        section[id] { scroll-margin-top: 80px; }
+        header[id] { scroll-margin-top: 0; }
+
         body {
           margin: 0;
           background: var(--bg);
@@ -876,7 +899,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/5" style={{ background: "rgba(8,12,18,0.92)", backdropFilter: "blur(12px)" }}>
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
           {/* Logo — AK·23 */}
-          <a href="#home" className="flex items-center gap-3 group" title="AK · Abhinav Kusampudi">
+          <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="flex items-center gap-3 group" title="AK · Abhinav Kusampudi">
             <div className="flex items-center" style={{ gap: 0 }}>
               {/* AK block */}
               <div
@@ -918,6 +941,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
               <a
                 key={label}
                 href={href}
+                onClick={(e) => scrollToSection(e, (href as string).replace('#', ''))}
                 className="font-mono-custom text-xs tracking-widest uppercase px-3 py-2 text-white/40 hover:text-white transition"
               >
                 {label}
@@ -1093,6 +1117,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           >
             <a
               href="#experience"
+              onClick={(e) => scrollToSection(e, 'experience')}
               className="inline-flex items-center gap-2 font-mono-custom text-sm tracking-widest uppercase px-6 py-3 lift"
               style={{ background: "#F5A623", color: "#080C12" }}
             >
@@ -1443,7 +1468,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           </div>
 
           {/* Featured Projects Grid */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
             {DATA.featuredProjects.map(p => (
               <motion.div
                 key={p.id}
