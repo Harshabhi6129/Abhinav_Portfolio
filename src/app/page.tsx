@@ -659,7 +659,6 @@ export default function Portfolio() {
   const [bullets, setBullets] = useState<{ x: number; y: number; id: number }[]>([]);
   const [sparks, setSparks] = useState<{ x: number; y: number; id: number; color: string }[]>([]);
   const [isFlashing, setIsFlashing] = useState(false);
-  const [isShaking, setIsShaking] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -669,9 +668,7 @@ export default function Portfolio() {
   const handleShot = (x: number, y: number) => {
     // Trigger Effects
     setIsFlashing(true);
-    setIsShaking(true);
     setTimeout(() => setIsFlashing(false), 50);
-    setTimeout(() => setIsShaking(false), 150);
 
     // Spawn Bullet Hole
     const newId = Date.now();
@@ -733,14 +730,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
   };
 
   return (
-    <motion.div 
-      className="relative"
-      animate={isShaking ? { 
-        x: [0, -2, 2, -1, 1, 0], 
-        y: [0, 1, -1, 1, -1, 0] 
-      } : {}}
-      transition={{ duration: 0.15 }}
-    >
+    <div className="relative">
       {/* Muzzle Flash Overlay */}
       <AnimatePresence>
         {isFlashing && (
@@ -1861,7 +1851,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
