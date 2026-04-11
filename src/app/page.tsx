@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import {
   Github, Linkedin, Mail, ExternalLink, FileText,
   ArrowRight, ChevronDown, X, Terminal, Zap, Globe
 } from "lucide-react";
+
+// Lazy-load the ThreeBackground so it doesn't block initial paint
+const ThreeBackground = lazy(() => import('./ThreeBackground'));
 
 // ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
 // Palette: Blue-black bg · Warm white text · Electric amber accent
@@ -872,7 +875,12 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           50% { filter: brightness(1.4) contrast(1.5); }
         }
       `}</style>
-      
+
+      {/* 3D Gun Background — scroll-driven rotation, fully isolated */}
+      <Suspense fallback={null}>
+        <ThreeBackground />
+      </Suspense>
+
       {/* Custom Cursor */}
       <CustomCursor onShot={handleShot} bullets={bullets} sparks={sparks} />
 
