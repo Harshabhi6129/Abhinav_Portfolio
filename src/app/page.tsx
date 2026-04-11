@@ -1007,10 +1007,7 @@ Contact: abhinavkuwork@gmail.com | linkedin.com/in/abhinavku6129`;
           />
         </div>
 
-        {/* Ghost AK-47 — sits outside overflow-hidden so it's fully visible */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-          <AK47Ghost />
-        </div>
+
 
         {/* Bottom fade to next section */}
         <div
@@ -2052,14 +2049,3 @@ function ScrollProgress() {
   return <motion.div id="progress" style={{ width }} />;
 }
 
-// 3. AK-47 Ghost SVG Background Decoration
-function AK47Ghost() {
-  return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl opacity-[0.02] mix-blend-screen pointer-events-none select-none overflow-visible">
-       <svg viewBox="0 0 1000 400" className="w-full h-auto text-[#E8E4DC]">
-        <path fill="currentColor" d="M100,200 L150,200 L180,180 L350,180 L350,170 L380,170 L380,180 L450,180 L450,165 L500,165 L500,180 L800,180 L810,195 L950,205 L950,225 L880,225 L880,350 L840,350 L820,225 L600,225 L580,380 L520,380 L520,225 L380,225 L380,280 L320,280 L320,225 L180,225 L100,250 Z" />
-        {/* Simple geometric outline of an assault rifle for the 'ghost' feel */}
-      </svg>
-    </div>
-  );
-}
